@@ -1,0 +1,134 @@
+configuration {
+  modi:                     "drun";
+  show-icons:               false;
+  font:                     "Ubuntu Nerd Font Bold 16";
+}
+
+@theme "~/.config/rofi/gruvbox.rasi"
+
+/* ------------------------- Main Window ------------------------- */
+
+window {
+  enabled:                  true;
+  location:                 center;
+  anchor:                   center;
+  y-offset:                 3px;
+  width:                    500px;
+  fullscreen:               false;
+  transparency:             "real";
+  border:                   2px;
+  border-radius:            0;
+  border-color:             @selected;
+  background-color:         @background;
+
+  children:                 [ "mainbox" ];
+}
+
+/* ----------------------- Main Container ------------------------ */
+
+mainbox {
+  enabled:                  true;
+  orientation:              vertical;
+  padding:                  2.2px 0;
+  background-color:         inherit;
+  text-color:               @foreground;
+
+  children:                 [ "wallbox", "listbox" ];
+}
+
+/* ----------------------- Input Container ----------------------- */
+
+wallbox {
+  enabled:                  false;
+  orientation:              horizontal;
+  expand:                   false;
+  margin:                   8px 8px;
+  padding:                  -22px;
+  border-radius:            0;
+  background-color:         @background;
+
+  children:                 [ "inputbar" ];
+}
+
+/* --------------------------- Input Bar ------------------------- */
+
+inputbar {
+  enabled:                  true;
+  expand:                   true;
+  background-color:         inherit;
+
+  children:                 [ "entry" ];
+}
+
+/* ---------------------------- Entry ---------------------------- */
+
+entry {
+  enabled:                  true;
+  padding:                  28.8px;
+  cursor:                   text;
+  background-color:         inherit;
+  text-color:               @foreground;
+}
+
+/* ----------------------- List Container ------------------------ */
+
+listbox {
+  enabled:                  true;
+  orientation:              vertical;
+  background-color:         inherit;
+
+  children:                 [ "listview" ];
+}
+
+/* -------------------------- List View -------------------------- */
+
+listview {
+  enabled:                  true;
+  layout:                   vertical;
+  cycle:                    false;
+  dynamic:                  true;
+  fixed-height:             true;
+  fixed-columns:            false;
+  expand:                   false;
+  reverse:                  false;
+  columns:                  1;
+  lines:                    13;
+  padding:                  6.4px 8px;
+  spacing:                  0;
+  background-color:         inherit;
+  scrollbar:                true;
+}
+
+scrollbar {
+    handle-width:                5px ;
+    handle-color:                @selected;
+    border-radius:               0px;
+    background-color:            @background-alt;
+}
+
+/* ------------------------ List Elements ------------------------ */
+
+element {
+  enabled:                  true;
+  padding:                  6.4px;
+  cursor:                   pointer;
+  background-color:         transparent;
+  text-color:               @foreground;
+}
+
+element selected.normal {
+  border-radius:            0;
+  background-color:         @selected;
+  text-color:               @background-alt;
+}
+
+/* ----------------------- Element Text -------------------------- */
+
+element-text {
+  enabled:                  true;
+  vertical-align:           0;
+  horizontal-align:         0;
+  cursor:                   inherit;
+  background-color:         transparent;
+  text-color:               inherit;
+}

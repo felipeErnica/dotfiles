@@ -1,0 +1,49 @@
+@use "gruvbox.scss";
+
+* {
+	background-image: none;
+	box-shadow: none;
+}
+
+window {
+	background-color: gruvbox.$bg1;
+}
+
+button {
+    border-radius: 0;
+    border-color: gruvbox.$bg4;
+	text-decoration-color: gruvbox.$fg;
+    color: gruvbox.$fg1;
+	background-color: gruvbox.$bg2;
+	border-style: solid;
+	border-width: 1px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25%;
+}
+
+button:hover {
+	background-color: gruvbox.$bg3;
+    color: gruvbox.$yellow;
+	outline-style: none;
+}
+
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+}

@@ -1,0 +1,192 @@
+@use "gruvbox.scss" as g;
+
+/* --- Global Styles --- */
+* {
+  font-family: 'Ubuntu Nerd Font';
+  font-size: 20px;
+  min-height: 0;
+  padding-right: 0px;
+  padding-left: 0px;
+  padding-bottom: 0px;
+}
+
+/* --- Waybar Container --- */
+#waybar {
+  background: transparent;
+  color: g.$fg;
+  margin: 0px;
+  font-weight: 500;
+}
+
+/* --- Left Modules (Individual, Fully Rounded Blocks - With Horizontal Spacing & Simple Hover) --- */
+#custom-apps,
+#workspaces,
+#disk,
+#memory,
+#cpu {
+  background-color: g.$bg;
+  padding: 0.3rem 0.7rem;
+  margin: 5px 0px;
+  margin-right: 5px;
+  /* 5px top/bottom margin, 0px left/right (base for individual control) */
+  border-radius: 6px;
+  /* These modules are always rounded */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  min-width: 0;
+  border: none;
+  /* Transition for background-color and color only */
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+#custom-apps {
+  border-radius: 0px;
+  margin-right: 0px;
+  padding-right: 20px;
+}
+
+#workspaces {
+  border-radius: 0px 6px 6px 0px;
+  padding: 2px;
+}
+
+/* Simple Hover effects for individual left modules - BRIGHTER COLOR */
+#custom-apps:hover,
+#disk:hover,
+#memory:hover,
+#clock:hover,
+#cpu:hover {
+  background: rgba(g.$bg2, 0.8);
+  box-shadow: inset 0 0 0 1px g.$gray;
+  /* Brighter highlight */
+}
+
+#custom-apps:hover {
+  background: rgba(g.$bg2, 0.8);
+}
+
+#workspaces button {
+  color: g.$fg1;
+  border-radius: 5px;
+  /* Workspaces buttons are always rounded */
+  padding: 0.3rem 0.6rem;
+  background: transparent;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  outline: none;
+}
+
+#workspaces button:hover,
+#workspaces button.active {
+  color: g.$blue;
+  background: rgba(g.$blue-dim, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(g.$blue-dim, 0.3);
+}
+
+// #workspaces button:hover {
+//     background: rgba(g.$blue-dim, 0.2);
+//     box-shadow: inset 0 0 0 1px rgba(g.$blue-dim, 0.3);
+// }
+
+/* --- Center Module (Individual, Fully Rounded Block - With Simple Hover) --- */
+#clock {
+  background-color: g.$bg;
+  padding: 0.3rem 0.7rem;
+  margin: 5px 0px;
+  border-radius: 6px;
+  /* This module is always rounded */
+  box-shadow: 0 1px 3px rgba(153, 209, 219, 0.2);
+  min-width: 0;
+  border: none;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* --- Right Modules (Single, Seamless Bar ) --- */
+#bluetooth,
+#custom-poweroff,
+#pulseaudio,
+#backlight,
+#network,
+#custom-lock,
+#battery {
+  color: g.$fg1;
+  background-color: g.$bg;
+  padding: 0.3rem 0.7rem;
+  margin: 5px 0px;
+  border-radius: 0;
+  box-shadow: none;
+  min-width: 0;
+  border: none;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+#bluetooth:hover,
+#custom-poweroff:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#network:hover,
+#custom-lock:hover,
+#battery:hover {
+  background: rgba(g.$bg2, 0.8);
+  box-shadow: inset 0 0 0 1px g.$gray;
+}
+
+#bluetooth {
+  margin-left: 0px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+#battery {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  margin-right: 7px;
+}
+
+#clock {
+  font-weight: 500;
+}
+
+#network.disabled,
+#network.disconnected {
+  color: g.$red;
+}
+
+#bluetooth {
+  font-size: 22px;
+}
+
+#bluetooth.off {
+  color: g.$red;
+}
+
+#bluetooth.connected {
+  color: g.$blue;
+}
+
+#battery.charging {
+  color: g.$green;
+}
+
+#battery.warning:not(.charging) {
+  color: g.$yellow;
+}
+
+#battery.critical:not(.charging) {
+  color: g.$red;
+}
+
+#custom-poweroff {
+  font-size: 22px;
+}
+
+/* --- Tooltip Styles --- */
+tooltip {
+  background-color: g.$bg2;
+  color: g.$fg2;
+  padding: 5px 12px;
+  margin: 5px 0px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+}
