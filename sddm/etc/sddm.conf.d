@@ -36,7 +36,7 @@ RebootCommand=/usr/bin/systemctl reboot
 
 [Theme]
 # Current theme name
-Current=KDE-Story
+Current=sugar-dark
 
 # Cursor size used in the greeter
 CursorSize=
