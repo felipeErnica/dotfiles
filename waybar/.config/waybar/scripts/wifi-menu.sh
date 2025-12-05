@@ -32,6 +32,13 @@ while true; do
   # Extract selected SSID
   read -r selected_ssid <<<"${selected_option:4}"
 
+    # Prompt for password using reusable function
+    get_password() {
+          rofi -dmenu -password \
+            -config "${config}" \
+            -theme-str "window { height: 47px; } wallbox { enabled: true; } entry { placeholder: \"Insira Senha\"; }"
+    }
+
   # Perform actions based on the selected option
   if [ -z "$selected_option" ]; then
     exit
@@ -60,13 +67,6 @@ while true; do
       exit
     fi
 
-    # Prompt for password using reusable function
-    get_password() {
-      rofi -dmenu -password \
-        -theme-str "window { height: 47px; } wallbox { enabled: true; } entry { placeholder: \"Insira Senha\"; }"
-        # -config "${config}" \
-    }
-
     manual_password=$(get_password)
 
     if [ -z "$manual_password" ]; then
@@ -85,20 +85,34 @@ while true; do
     # Notify when connection is activated successfully
     connected_notif="Conectado à \"$selected_ssid\"."
 
-    # Get saved connections
-    saved_connections=$(nmcli -g NAME connection)
+    # Try to connect using the selected SSID.
+    # If the network requires a password that is not stored, nmcli will fail.
+    # We prioritize the saved connection logic (connection up) if possible, 
+    # otherwise we use device wifi connect.
 
-    if echo "$saved_connections" | grep -qw "$selected_ssid"; then
-      nmcli connection up id "$selected_ssid" |
-        grep "successfully" &&
+    # 1. Try to connect using 'nmcli connection up' (for saved connections)
+    if nmcli connection up id "$selected_ssid" 2>&1 | grep -q "successfully"; then
         notify-send "Conexão estabelecida!" "$connected_notif"
+    
+    # 2. If connection up failed, or the connection is new, prompt for password
+    # and try with 'nmcli device wifi connect'.
     else
-      # Handle secure network connection
-      wifi_password=$(get_password)
+        # Check if the failure was due to the connection not existing (it's a new network)
+        # or due to authentication failure (needs password). In both cases, we prompt.
+        wifi_password=$(get_password)
 
-      nmcli device wifi connect "$selected_ssid" password "$wifi_password" |
-        grep "successfully" &&
-        notify-send "Wi-Fi" "$connected_notif"
+        if [ -z "$wifi_password" ]; then
+            # User canceled password prompt, exit the loop iteration
+            continue
+        fi
+
+        # Connect with the password, and check for success
+        if nmcli device wifi connect "$selected_ssid" password "$wifi_password" 2>&1 | grep -q "successfully"; then
+            notify-send "Wi-Fi" "$connected_notif"
+        else
+            # Send a generic failure notification if the connection attempt failed
+            notify-send "Wi-Fi" "Falha na conexão com \"$selected_ssid\". Verifique a senha."
+        fi
     fi
   fi
 done
