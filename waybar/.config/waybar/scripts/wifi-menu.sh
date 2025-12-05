@@ -7,6 +7,7 @@ config="$HOME/.config/rofi/wifi-menu.rasi"
 notify-send "Wi-Fi" "Procurando redes disponíveis..."
 
 while true; do
+    
   # Get list of available Wi-Fi networks and apply formatting
   wifi_list=$(nmcli --fields "SECURITY,SSID" device wifi list |
     sed 1d |
@@ -62,8 +63,8 @@ while true; do
     # Prompt for password using reusable function
     get_password() {
       rofi -dmenu -password \
-        -config "${config}" \
         -theme-str "window { height: 47px; } wallbox { enabled: true; } entry { placeholder: \"Insira Senha\"; }"
+        # -config "${config}" \
     }
 
     manual_password=$(get_password)
@@ -93,9 +94,7 @@ while true; do
         notify-send "Conexão estabelecida!" "$connected_notif"
     else
       # Handle secure network connection
-      if [[ "$selected_option" =~ " 󰤪" ]]; then
-        wifi_password=$(get_password)
-      fi
+      wifi_password=$(get_password)
 
       nmcli device wifi connect "$selected_ssid" password "$wifi_password" |
         grep "successfully" &&
