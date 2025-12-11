@@ -1,7 +1,8 @@
 configuration {
-  modi:                     "drun";
+  modi:                     "dmenu";
   show-icons:               false;
-  font:                     "Ubuntu Nerd Font Bold 16";
+  display-drun:            "";
+  font:                     "Ubuntu Nerd Font 16";
 }
 
 @theme "~/.config/rofi/gruvbox.rasi"
@@ -13,7 +14,6 @@ window {
   location:                 center;
   anchor:                   center;
   y-offset:                 3px;
-  width:                    500px;
   fullscreen:               false;
   transparency:             "real";
   border:                   2px;
@@ -33,41 +33,46 @@ mainbox {
   background-color:         inherit;
   text-color:               @foreground;
 
-  children:                 [ "wallbox", "listbox" ];
+  children:                 [ "inputbar", "listbox" ];
 }
 
 /* ----------------------- Input Container ----------------------- */
 
-wallbox {
-  enabled:                  false;
-  orientation:              horizontal;
-  expand:                   false;
-  margin:                   8px 8px;
-  padding:                  -22px;
-  border-radius:            0;
-  background-color:         @background;
-
-  children:                 [ "inputbar" ];
-}
-
-/* --------------------------- Input Bar ------------------------- */
-
+/*****----- Inputbar -----*****/
 inputbar {
-  enabled:                  true;
-  expand:                   true;
-  background-color:         inherit;
-
-  children:                 [ "entry" ];
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     10px;
+    border:                      1px solid;
+    border-radius:               4px;
+    border-color:                @selected;
+    background-color:            @background;
+    text-color:                  @foreground;
+    children:                    [ "prompt", "entry" ];
 }
 
-/* ---------------------------- Entry ---------------------------- */
+prompt {
+    enabled:                     true;
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "::";
+    background-color:            inherit;
+    text-color:                  inherit;
+}
 
 entry {
-  enabled:                  true;
-  padding:                  28.8px;
-  cursor:                   text;
-  background-color:         inherit;
-  text-color:               @foreground;
+    enabled:                     true;
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Pesquisar...";
+    placeholder-color:           inherit;
 }
 
 /* ----------------------- List Container ------------------------ */
