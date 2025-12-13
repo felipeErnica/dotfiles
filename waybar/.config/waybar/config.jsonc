@@ -75,7 +75,7 @@
         ],
         "interval": 5,
         "tooltip-format": "{essid} ({signalStrength}%) - {frequency} GHz",
-        "on-click": "~/.config/waybar/scripts/wifi-menu.sh"
+        "on-click": "python3 ~/.config/waybar/scripts/wifi-menu.py"
     },
 
     "cpu": {
