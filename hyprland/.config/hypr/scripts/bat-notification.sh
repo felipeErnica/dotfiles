@@ -12,7 +12,7 @@ while true; do
         if [ $bat_lvl -le $notify_level ]; then
             if [ $notify_level -lt $last_notify ]; then
                 notify-send -u critical "ATENÇÃO!" "Bateria em estado crítico: $bat_lvl%" \
-                    -i '/usr/share/icons/breeze-dark/status/22/battery-010.svg'
+                    -i '~/.config/hypr/scripts/low_battery_icon.png'
                 paplay '/usr/share/sounds/freedesktop/stereo/service-logout.oga'
                 last_notify=$bat_lvl
             fi

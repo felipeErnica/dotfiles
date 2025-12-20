@@ -58,7 +58,8 @@
         "tooltip": false,
         "format": "{:L%a,  %d/%m/%Y   %H:%M}",
         "interval": 1,
-        "locale": "pt_BR.utf8"
+        "locale": "pt_BR.utf8",
+        "on-click": "gnome-calendar"
     },
 
     "network": {
