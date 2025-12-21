@@ -23,7 +23,6 @@ if not bat_devices:
 BAT = bat_devices[0]
 capacity_file = BAT / "capacity"
 img_path = str(Path.home() / ".config/hypr/scripts/low_battery_icon.png")
-
 last_notify = 100
 
 while True:
@@ -39,7 +38,7 @@ while True:
         last_notify = bat_lvl
 
     for low_level in notify_levels:
-        if bat_lvl <= low_level and bat_lvl <= last_notify:
+        if bat_lvl <= low_level and low_level <= last_notify:
             subprocess.run([
                 "notify-send",
                 "-u", "critical",
@@ -53,7 +52,7 @@ while True:
                 "/usr/share/sounds/freedesktop/stereo/service-logout.oga"
             ], check=False)
 
-            last_notify = bat_lvl - 1
+            last_notify = low_level - 1
             break  # prevents multiple notifications in the same loop
 
     time.sleep(60)
