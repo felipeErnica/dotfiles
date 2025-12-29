@@ -27,7 +27,7 @@ last_notify = 100
 
 while True:
     try:
-        bat_lvl = int(capacity_file.read_text().strip())
+        bat_lvl = int(capacity_file.read_text().strip()) + 1
     except Exception as e:
         print(f"Failed to read battery level: {e}")
         time.sleep(60)
@@ -38,7 +38,7 @@ while True:
         last_notify = bat_lvl
 
     for low_level in notify_levels:
-        if bat_lvl <= low_level and low_level <= last_notify:
+        if bat_lvl <= low_level and low_level < last_notify:
             subprocess.run([
                 "notify-send",
                 "-u", "critical",
@@ -52,7 +52,7 @@ while True:
                 "/usr/share/sounds/freedesktop/stereo/service-logout.oga"
             ], check=False)
 
-            last_notify = low_level - 1
+            last_notify = low_level
             break  # prevents multiple notifications in the same loop
 
     time.sleep(60)
