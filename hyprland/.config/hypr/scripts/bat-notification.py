@@ -27,7 +27,7 @@ last_notify = 100
 
 while True:
     try:
-        bat_lvl = int(capacity_file.read_text().strip()) + 1
+        bat_lvl = int(capacity_file.read_text().strip())
     except Exception as e:
         print(f"Failed to read battery level: {e}")
         time.sleep(60)
