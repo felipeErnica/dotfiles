@@ -64,7 +64,7 @@
 
     "network": {
         "format-wifi": "󰤢  {essid}",
-        "format-ethernet": "󰈀 ",
+        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
         "format-disconnected": "  Desconectado",
         "format-disabled": "  Desativado",
         "format-icons": [
@@ -75,7 +75,9 @@
             "󰤨"
         ],
         "interval": 5,
-        "tooltip-format": "{essid} ({signalStrength}%) - {frequency} GHz",
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) - {frequency} GHz",
+        "tooltip-format-ethernet": "{ifname} ",
         "on-click": "python3 ~/.config/waybar/scripts/wifi-menu.py"
     },
 

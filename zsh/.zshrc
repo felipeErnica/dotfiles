@@ -3,6 +3,9 @@
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
 
 #Ativa o starship
 eval "$(starship init zsh)"
@@ -110,3 +113,4 @@ export EDITOR='nvim'
 
 # aliases
 alias mux="tmuxinator"
+alias air="$GOBIN/air"

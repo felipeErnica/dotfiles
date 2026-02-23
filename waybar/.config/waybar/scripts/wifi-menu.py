@@ -120,19 +120,24 @@ if ssid in known_conns:
     result = run(f'nmcli connection up id "{ssid}"')
     if "sucesso" in result:
         notify("Conexão Estabelecida", success_msg)
-    else:
-        notify("Falha ao Conectar",
-               f'Não foi possível conectar à rede "{ssid}".')
-    sys.exit(0)
-
-# New connection
-password = ""
-if chosen.startswith("󱚿"):
-    password = get_password()
-    if not password:
-        notify("Conexão Cancelada", "Senha não fornecida.")
         sys.exit(0)
 
+# New connection
+if chosen.startswith("󰖩"):
+    result = run(f'nmcli device wifi connect "{ssid}"')
+    if "sucesso" in result:
+        notify("Conexão Estabelecida", success_msg)
+    else:
+        notify(
+            "Falha ao Conectar",
+            f'Não foi possível conectar à rede "{ssid}".',
+        )
+    sys.exit(0)
+
+password = get_password()
+if not password:
+    notify("Conexão Cancelada", "Senha não fornecida.")
+    sys.exit(0)
 result = run(
     f'nmcli device wifi connect "{ssid}" password "{password}"'
 )
