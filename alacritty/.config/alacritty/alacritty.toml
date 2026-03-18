@@ -1,5 +1,7 @@
 [window]
-opacity = 0.2
+opacity = 0.5
+blur = true
+decorations_theme_variant = "Dark"
 
 [font]
 normal = {family = "Hack Nerd Font", style = "Regular"}

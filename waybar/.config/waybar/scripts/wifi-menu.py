@@ -5,7 +5,6 @@ from pathlib import Path
 
 CONFIG = Path.home() / ".config/rofi/wifi-menu.rasi"
 
-
 def run(cmd, capture=True):
     if capture:
         return subprocess.run(
@@ -14,9 +13,10 @@ def run(cmd, capture=True):
             text=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.DEVNULL,
+            timeout=10,
         ).stdout.strip()
     else:
-        subprocess.run(cmd, shell=True)
+        subprocess.run(cmd, shell=True, timeout=10)
 
 
 def notify(title, message):
@@ -138,6 +138,7 @@ password = get_password()
 if not password:
     notify("Conexão Cancelada", "Senha não fornecida.")
     sys.exit(0)
+
 result = run(
     f'nmcli device wifi connect "{ssid}" password "{password}"'
 )
