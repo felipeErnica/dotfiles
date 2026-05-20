@@ -1,0 +1,5 @@
+require("config.general")
+require("config.env")
+require("config.decoration")
+require("config.gestures")
+require("config.binds")

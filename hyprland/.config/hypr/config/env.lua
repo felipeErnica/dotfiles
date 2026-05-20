@@ -1,0 +1,6 @@
+hl.env("XCURSOR_THEME", "volantes")
+hl.env("XCURSOR_SIZE", "32")
+hl.env("HYPRCURSOR_SIZE", "32")
+hl.env("HYPRCURSOR_THEME", "volantes")
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+hl.env("GTK_THEME", "Gruvbox")
