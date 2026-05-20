@@ -147,7 +147,7 @@ window#waybar {
   @include module-base;
   @include pill-left;
   color: g.$blue;
-  font-size: 16px;
+  font-size: 18px;
   margin-left: 10px;
 
   &:hover {
