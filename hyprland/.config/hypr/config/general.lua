@@ -1,6 +1,6 @@
 --Monitores
-hl.monitor({output = "eDP-1", mode = "preferred", position = "0x0", scale = 1})
-hl.monitor({output = "", mode = "preferred", position = "auto", scale = 1, mirror = "eDP-1"})
+hl.monitor({ output = "eDP-1", mode = "preferred", position = "0x0", scale = 1 })
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1, mirror = "eDP-1" })
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("waybar")
@@ -23,11 +23,34 @@ hl.config({
         layout = "scrolling",
 
         col = {
-            active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg",
-            inactive_border = "rgba(595959aa)",
+            active_border = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
+            inactive_border = { colors = { "rgba(595959aa)" } },
         }
     },
 
+    --Decorações gerais
+    decoration = {
+        rounding = 0,
+        active_opacity = 0,
+        inactive_opacity = 0,
+
+        blur = {
+            enabled = true,
+            size = 3,
+            passes = 2,
+            contrast = 1.8,
+            brightness = 1,
+        }
+
+    },
+
+    --Desativa decorações padrões
+    misc = {
+        force_default_wallpaper = 0,
+        disable_hyprland_logo = true,
+    },
+
+    --Configurações de teclado e mouse
     input = {
         kb_layout = "br",
         kb_model = "abnt2",
