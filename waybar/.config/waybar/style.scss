@@ -1,171 +1,282 @@
 @use "gruvbox.scss" as g;
 
+/* --- Variables & Mixins --- */
+$bg-color: g.$bg;
+$border-radius: 15px;
+$margin-vertical: 4px;
+$padding-horizontal: 15px;
+
+@mixin module-base {
+  background-color: $bg-color;
+  color: g.$fg;
+  padding: 10px $padding-horizontal;
+  margin-top: $margin-vertical;
+  margin-bottom: $margin-vertical;
+  transition: all 0.3s cubic-bezier(.55, 0, .1, 1);
+}
+
+@mixin pill-left {
+  border-radius: $border-radius 0 0 $border-radius;
+  margin-left: 10px;
+}
+
+@mixin pill-right {
+  border-radius: 0 $border-radius $border-radius 0;
+  margin-right: 10px;
+}
+
+@mixin pill-middle {
+  border-radius: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@mixin pill-isolated {
+  border-radius: $border-radius;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 /* --- Global Styles --- */
 * {
   font-family: 'Ubuntu Nerd Font';
-  font-size: 16px;
-}
-
-/* --- Waybar Container --- */
-#waybar {
-  background: transparent;
-  color: g.$fg;
-  font-weight: 500;
-}
-
-/* --- Left Modules (Individual, Fully Rounded Blocks - With Horizontal Spacing & Simple Hover) --- */
-#custom-apps,
-#workspaces,
-#disk,
-#memory,
-#cpu {
-  background-color: g.$bg;
-  padding: 0.3rem 0.7rem;
-  margin: 5px 0px;
-  margin-right: 5px;
-  /* 5px top/bottom margin, 0px left/right (base for individual control) */
-  /* These modules are always rounded */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  min-width: 0;
+  font-size: 15px;
   border: none;
-  /* Transition for background-color and color only */
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  box-shadow: none;
 }
+
+window#waybar {
+  background: transparent;
+}
+
+/* --- Left Modules --- */
 
 #custom-apps {
-  margin-right: 0px;
-  padding-right: 20px;
+  @include module-base;
+  color: g.$purple;
+  padding: 0 $padding-horizontal;
+  border-radius: 0 $border-radius $border-radius 0;
+
+  &:hover {
+    background-color: g.$purple;
+    color: g.$bg;
+  }
 }
 
 #workspaces {
-  // border-radius: 0px 6px 6px 0px;
-  padding: 2px;
+  @include module-base;
+  @include pill-isolated;
+  padding: 0 $padding-horizontal;
+
+  button {
+    padding: 0 8px;
+    color: g.$fg4;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: g.$blue;
+    }
+
+    &.active {
+      color: g.$blue;
+      font-weight: bold;
+    }
+
+    &.urgent {
+      color: g.$red;
+    }
+  }
 }
 
-/* Simple Hover effects for individual left modules - BRIGHTER COLOR */
-#custom-apps:hover,
-#disk:hover,
-#memory:hover,
-#clock:hover,
-#cpu:hover {
-  background: rgba(g.$bg2, 0.8);
-  box-shadow: inset 0 0 0 1px g.$gray;
-  /* Brighter highlight */
-}
-
-#custom-apps:hover {
-  background: rgba(g.$bg2, 0.8);
-}
-
-#workspaces button {
-  color: g.$fg1;
-  border-radius: 0px;
-  /* Workspaces buttons are always rounded */
-  padding: 0.3rem 0.6rem;
-  background: transparent;
-  transition: all 0.2s ease-in-out;
-  border: none;
-  outline: none;
-}
-
-#workspaces button:hover,
-#workspaces button.active {
+#cpu {
+  @include module-base;
+  @include pill-left;
   color: g.$blue;
-  background: rgba(g.$blue-dim, 0.2);
-  box-shadow: inset 0 0 0 1px rgba(g.$blue-dim, 0.3);
+  margin-left: 10px;
+
+  &:hover {
+    color: g.$fg1;
+    background-color: g.$blue
+  }
 }
 
-/* --- Center Module (Individual, Fully Rounded Block - With Simple Hover) --- */
-#clock {
-  background-color: g.$bg;
-  padding: 0.3rem 0.7rem;
-  margin: 5px 0px;
-  /* This module is always rounded */
-  min-width: 0;
-  border: none;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+#memory {
+  @include module-base;
+  @include pill-middle;
+  color: g.$aqua;
+
+  &:hover {
+    color: g.$fg1;
+    background-color: g.$aqua
+  }
+
 }
 
-/* --- Right Modules (Single, Seamless Bar ) --- */
-#bluetooth,
-#custom-poweroff,
-#pulseaudio,
-#backlight,
-#network,
-#custom-lock,
-#battery {
-  color: g.$fg1;
-  background-color: g.$bg;
-  padding: 0.3rem 0.7rem;
-  margin: 5px 0px;
-  min-width: 0;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+#disk {
+  @include module-base;
+  @include pill-right;
+  color: g.$yellow;
+  margin-right: 10px;
+
+  &:hover {
+    color: g.$bg1;
+    background-color: g.$yellow
+  }
+
 }
 
-#bluetooth:hover,
-#custom-poweroff:hover,
-#pulseaudio:hover,
-#backlight:hover,
-#network:hover,
-#custom-lock:hover,
-#battery:hover {
-  background: rgba(g.$bg2, 0.8);
-  box-shadow: inset 0 0 0 1px g.$gray;
-}
-
-#bluetooth {
-  margin-left: 0px;
-}
-
-#battery {
-  margin-right: 7px;
-}
+/* --- Center Modules --- */
 
 #clock {
-  font-weight: 500;
+  @include module-base;
+  @include pill-isolated;
+  color: g.$fg;
+  font-weight: bold;
+  padding: 0 20px;
+
+  &:hover {
+    color: g.$bg1;
+    background-color: g.$fg1
+  }
+
 }
 
-#network.disabled,
-#network.disconnected {
-  color: g.$red;
-}
+/* --- Right Modules --- */
 
 #bluetooth {
-  font-size: 22px;
-}
-
-#bluetooth.off {
-  color: g.$red;
-}
-
-#bluetooth.connected {
+  @include module-base;
+  @include pill-left;
   color: g.$blue;
+  font-size: 16px;
+  margin-left: 10px;
+
+  &:hover {
+    color: g.$fg1;
+    background-color: g.$blue
+  }
+
+  &.connected {
+    color: g.$green;
+
+    &:hover {
+      color: g.$fg1;
+      background-color: g.$green
+    }
+  }
+
+  &.off {
+    color: g.$red;
+
+    &:hover {
+      color: g.$fg1;
+      background-color: g.$red
+    }
+  }
+
 }
 
-#battery.charging {
-  color: g.$green;
+#network {
+  @include module-base;
+  @include pill-middle;
+  color: g.$aqua;
+
+  &:hover {
+    color: g.$fg1;
+    background-color: g.$aqua
+  }
+
+  &.disconnected,
+  &.disabled {
+    color: g.$red;
+
+    &:hover {
+      color: g.$fg1;
+      background-color: g.$red
+    }
+  }
 }
 
-#battery.warning:not(.charging) {
+#pulseaudio {
+  @include module-base;
+  @include pill-middle;
+  color: g.$orange;
+
+  &:hover {
+    color: g.$fg1;
+    background-color: g.$orange
+  }
+
+  &.muted {
+    color: g.$gray;
+  }
+}
+
+#backlight {
+  @include module-base;
+  @include pill-middle;
   color: g.$yellow;
 }
 
-#battery.critical:not(.charging) {
-  color: g.$red;
+#battery {
+  @include module-base;
+  @include pill-right;
+  color: g.$fg1;
+  margin-right: 10px;
+
+  &:hover {
+    color: g.$bg1;
+    background-color: g.$fg1
+  }
+
+  &.charging {
+    color: g.$green;
+
+    &:hover {
+      color: g.$fg1;
+      background-color: g.$green
+    }
+  }
+
+  &.warning:not(.charging) {
+    color: g.$yellow;
+
+    &:hover {
+      color: g.$fg1;
+      background-color: g.$yellow
+    }
+  }
+
+  &.critical:not(.charging) {
+    color: g.$red;
+
+    &:hover {
+      color: g.$fg1;
+      background-color: g.$red
+    }
+  }
 }
 
 #custom-poweroff {
-  font-size: 22px;
+  @include module-base;
+  border-radius: $border-radius 0 0 $border-radius;
+  color: g.$red;
+  font-size: 18px;
+  padding: 0 15px;
+
+  &:hover {
+    background-color: g.$red;
+    color: g.$bg;
+  }
 }
 
 /* --- Tooltip Styles --- */
 tooltip {
-  background-color: g.$bg2;
-  color: g.$fg2;
-  padding: 15px;
-  border-radius: 0px;
-  margin: 7px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 12px;
-  box-shadow: none;
+  background: g.$bg_h;
+  border: 1px solid g.$bg2;
+  border-radius: 10px;
+
+  label {
+    color: g.$fg;
+    padding: 8px;
+  }
 }

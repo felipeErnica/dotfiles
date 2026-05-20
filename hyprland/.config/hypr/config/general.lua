@@ -8,9 +8,9 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hypridle")
     hl.exec_cmd("swaync")
     hl.exec_cmd("swayosd-server")
-    hl.exec_cmd("dbus-update-activation-enviroment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
     hl.exec_cmd("firefox", { workspace = "2 silent" })
-    hl.exec_cmd("alacritty -e zsh -c fastfetch")
+    hl.exec_cmd('alacritty -e zsh -c "fastfetch; exec zsh"')
 end)
 
 hl.config({
@@ -24,15 +24,13 @@ hl.config({
 
         col = {
             active_border = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
-            inactive_border = { colors = { "rgba(595959aa)" } },
+            inactive_border = "rgba(595959aa)",
         }
     },
 
     --Decorações gerais
     decoration = {
         rounding = 0,
-        active_opacity = 0,
-        inactive_opacity = 0,
 
         blur = {
             enabled = true,

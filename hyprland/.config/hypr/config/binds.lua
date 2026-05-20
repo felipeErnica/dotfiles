@@ -5,7 +5,7 @@ local menu = "rofi -show drun -theme launcher.rasi"
 
 --Atalhos Gerais
 hl.bind("SUPER + Q", hl.dsp.exec_cmd(terminal))
-hl.bind("SUPER + C", hl.dsp.window.kill())
+hl.bind("SUPER + C", hl.dsp.window.close())
 hl.bind("SUPER + E", hl.dsp.exec_cmd(fileManager))
 hl.bind("SUPER + R", hl.dsp.exec_cmd(menu))
 hl.bind("SUPER + B", hl.dsp.exec_cmd(btop))

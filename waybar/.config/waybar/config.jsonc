@@ -28,15 +28,11 @@
     "custom/apps" : {
         "format": "",
         "on-click": "rofi -show drun -theme launcher.rasi",
-        "tooltip": false
+        "tooltip-format": "Aplicativos"
     },
 
     "hyprland/workspaces": {
-        "format": "{name}: {icon}",
-        "format-icons": {
-            "active": "",
-            "default": ""
-        }
+        "on-click": "activate"
     },
 
     "bluetooth": {
@@ -164,6 +160,6 @@
     "custom/poweroff": {
         "format": "󰐥",
         "on-click": "wlogout",
-        "tooltip": false
+        "tooltip-format": "Opções de Encerramento"
     }
 }
