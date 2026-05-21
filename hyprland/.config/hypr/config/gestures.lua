@@ -6,6 +6,6 @@ hl.gesture({
     fingers = 3,
     direction = "vertical",
     action = function()
-        hl.dispatch(hl.dsp.global("overview:toggle"))
+        hl.dispatch(hl.dsp.exec_cmd("snappy-switcher toggle"))
     end
 })
