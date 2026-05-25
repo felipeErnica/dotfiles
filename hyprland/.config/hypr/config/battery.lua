@@ -57,7 +57,7 @@ local function check_battery_level()
     local img_path = home .. "/.config/hypr/icons"
 
     for _, critical_level in ipairs(critical_levels) do
-        if bat_lvl <= critical_level and critical_level ~= last_notify then
+        if bat_lvl <= critical_level and critical_level < last_notify then
             local critical_level_img = img_path .. "/critical_battery_level.png"
             local notify_parts = {
                 "notify-send -u critical",
@@ -79,7 +79,7 @@ local function check_battery_level()
     end
 
     for _, low_level in ipairs(low_levels) do
-        if bat_lvl <= low_level and low_level ~= last_notify then
+        if bat_lvl <= low_level and low_level < last_notify then
             local low_level_img = img_path .. "/low_battery_level.png"
             local notify_cmd = string.format(
                 'notify-send -u critical "ATENÇÃO: Bateria baixa!"  "Bateria abaixo de %d%%" -i "%s" -t %d',
@@ -110,5 +110,5 @@ end
 if not battery_exists() then
     print("[Hyprland Config Warning] Nenhuma bateria encontrada!")
 else
-    hl.timer(check_battery_level, { timeout = 120 * sec, type = "repeat" })
+    hl.timer(check_battery_level, { timeout = 10 * sec, type = "repeat" })
 end

@@ -196,6 +196,26 @@ window#waybar {
   }
 }
 
+#custom-vpn {
+  @include module-base;
+  @include pill-middle;
+  color: g.$aqua;
+
+  &:hover {
+    color: g.$fg1;
+    background-color: g.$aqua
+  }
+
+  &.disconnected {
+    color: g.$yellow;
+
+    &:hover {
+      color: g.$bg;
+      background-color: g.$yellow
+    }
+  }
+}
+
 #pulseaudio {
   @include module-base;
   @include pill-middle;

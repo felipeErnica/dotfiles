@@ -19,6 +19,7 @@
     "modules-right": [
         "bluetooth",
         "network",
+        "custom/vpn",
         "pulseaudio",
         "backlight",
         "battery",
@@ -27,7 +28,7 @@
 
     "custom/apps" : {
         "format": "",
-        "on-click": "rofi -show drun -theme launcher.rasi",
+        "on-click": "ags toggle launcher",
         "tooltip-format": "Aplicativos"
     },
 
@@ -75,6 +76,30 @@
         "tooltip-format-wifi": "{essid} ({signalStrength}%) - {frequency} GHz",
         "tooltip-format-ethernet": "{ifname} ",
         "on-click": "python3 ~/.config/waybar/scripts/wifi-menu.py"
+    },
+
+    // "custom/vpn": {
+    //     "interval": 2,
+    //     "return-type": "json",
+    //     "format": "{icon}",
+    //     "format-icon": {
+    //         "connected": "󱢾",
+    //         "disconnected": "󰦞"
+    //     },
+    //     "exec": "python3 ~/.config/waybar/scripts/vpn.py output",
+    //     "on-click": "nordvpn status | grep -q 'Status: Connected' && nordvpn d || nordvpn c"
+    // },
+
+    "custom/vpn": {
+        "interval": 2,
+        "return-type": "json",
+        "format": "VPN  {icon}",
+        "format-icons": {
+            "connected": "󱢾",
+            "disconnected": "󰦞"
+        },
+        "exec": "python3 ~/.config/waybar/scripts/vpn.py | jq --unbuffered --compact-output",
+        "on-click": "nordvpn status | grep -q 'Status: Connected' && nordvpn d || nordvpn c"
     },
 
     "cpu": {

@@ -1,3 +1,4 @@
+require("monitors")
 require("config.general")
 require("config.env")
 require("config.gestures")

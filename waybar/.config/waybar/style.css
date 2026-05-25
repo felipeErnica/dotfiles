@@ -184,6 +184,30 @@ window#waybar {
   background-color: #fb4934;
 }
 
+#custom-vpn {
+  background-color: #282828;
+  color: #fbf1c7;
+  padding: 10px 15px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+  border-radius: 0;
+  margin-left: 0;
+  margin-right: 0;
+  color: #8ec07c;
+}
+#custom-vpn:hover {
+  color: #ebdbb2;
+  background-color: #8ec07c;
+}
+#custom-vpn.disconnected {
+  color: #fabd2f;
+}
+#custom-vpn.disconnected:hover {
+  color: #282828;
+  background-color: #fabd2f;
+}
+
 #pulseaudio {
   background-color: #282828;
   color: #fbf1c7;

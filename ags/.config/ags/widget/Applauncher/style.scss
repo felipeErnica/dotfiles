@@ -1,0 +1,32 @@
+@use "../../gruvbox.scss" as g;
+
+.launcher {
+  background-color: transparent;
+}
+
+.launcher-content {
+  background-color: g.$bg;
+  border-radius: 12px;
+  padding: 6px;
+}
+
+.launcher-entry {
+  font-size: 25px;
+  border-radius: 0px;
+  font-weight: bold;
+}
+
+.launcher-button {
+  background-color: transparent;
+  border-radius: 0px;
+
+  &:focus,
+  &:hover {
+    background-color: g.$bg2;
+    box-shadow: inset 0 0 10px g.$blue;
+  }
+}
+
+.launcher-button-label {
+  margin-left: 30px;
+}

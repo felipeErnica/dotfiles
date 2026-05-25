@@ -5,6 +5,7 @@ from pathlib import Path
 
 CONFIG = Path.home() / ".config/rofi/wifi-menu.rasi"
 
+
 def run(cmd, capture=True):
     if capture:
         return subprocess.run(

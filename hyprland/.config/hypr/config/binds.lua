@@ -1,7 +1,7 @@
 local terminal = "alacritty -e zsh"
 local btop = terminal .. " -c btop"
 local fileManager = "nautilus"
-local menu = "rofi -show drun -theme launcher.rasi"
+local menu = "ags toggle launcher"
 
 --Atalhos Gerais
 hl.bind("SUPER + Q", hl.dsp.exec_cmd(terminal))
